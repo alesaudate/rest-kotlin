@@ -1,10 +1,8 @@
-package app.car.cap03.interfaces
+package app.car.cap04.interfaces.incoming
 
-import app.car.cap03.domain.Passenger
-import app.car.cap03.domain.TravelRequest
-import app.car.cap03.domain.TravelRequestStatus
-import app.car.cap03.domain.TravelService
-import app.car.cap03.interfaces.mapping.TravelRequestMapper
+import app.car.cap04.domain.TravelRequestStatus
+import app.car.cap04.domain.TravelService
+import app.car.cap04.interfaces.incoming.mapping.TravelRequestMapper
 import org.springframework.hateoas.EntityModel
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
-import javax.persistence.ManyToOne
 
 @Service
 @RestController

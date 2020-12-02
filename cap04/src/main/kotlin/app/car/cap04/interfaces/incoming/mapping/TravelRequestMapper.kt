@@ -1,18 +1,17 @@
-package app.car.cap03.interfaces.mapping
+package app.car.cap04.interfaces.incoming.mapping
 
-import app.car.cap03.domain.PassengerRepository
-import app.car.cap03.domain.TravelRequest
-import app.car.cap03.interfaces.TravelRequestInput
+import app.car.cap04.domain.PassengerRepository
+import app.car.cap04.domain.TravelRequest
+import app.car.cap04.interfaces.incoming.TravelRequestInput
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 import org.springframework.web.server.ResponseStatusException
 import org.springframework.hateoas.EntityModel
 
-import app.car.cap03.interfaces.TravelRequestOutput
-import app.car.cap03.interfaces.PassengerAPI
+import app.car.cap04.interfaces.incoming.TravelRequestOutput
+import app.car.cap04.interfaces.incoming.PassengerAPI
 
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn
 
 
 @Component

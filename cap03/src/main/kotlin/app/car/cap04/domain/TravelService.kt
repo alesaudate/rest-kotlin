@@ -1,4 +1,4 @@
-package app.car.cap03.domain
+package app.car.cap04.domain
 
 import org.springframework.stereotype.Component
 
