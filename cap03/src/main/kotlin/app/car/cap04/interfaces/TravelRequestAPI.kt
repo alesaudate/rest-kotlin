@@ -21,9 +21,9 @@ class TravelRequestAPI(
 ) {
 
     @PostMapping
-    fun makeTravelRequest(@RequestBody travelRequest: TravelRequestInput)
+    fun makeTravelRequest(@RequestBody travelRequestInput: TravelRequestInput)
         : EntityModel<TravelRequestOutput> {
-        val travelRequest = travelService.saveTravelRequest(mapper.map(travelRequest))
+        val travelRequest = travelService.saveTravelRequest(mapper.map(travelRequestInput))
         val output = mapper.map(travelRequest)
         return mapper.buildOutputModel(travelRequest, output)
     }

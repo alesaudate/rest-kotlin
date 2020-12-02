@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
+import org.springframework.web.bind.annotation.RequestParam
+
+import org.springframework.web.bind.annotation.GetMapping
+
+
+
 
 @Service
 @RestController
@@ -21,11 +27,17 @@ class TravelRequestAPI(
 ) {
 
     @PostMapping
-    fun makeTravelRequest(@RequestBody travelRequest: TravelRequestInput)
+    fun makeTravelRequest(@RequestBody travelRequestInput: TravelRequestInput)
         : EntityModel<TravelRequestOutput> {
-        val travelRequest = travelService.saveTravelRequest(mapper.map(travelRequest))
+        val travelRequest = travelService.saveTravelRequest(mapper.map(travelRequestInput))
         val output = mapper.map(travelRequest)
         return mapper.buildOutputModel(travelRequest, output)
+    }
+
+    @GetMapping("/nearby")
+    fun listNearbyRequests(@RequestParam currentAddress: String): List<EntityModel<TravelRequestOutput>> {
+        val requests = travelService.listNearbyTravelRequests(currentAddress)
+        return mapper.buildOutputModel(requests)
     }
 }
 
