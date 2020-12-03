@@ -2,6 +2,8 @@ package app.car.cap06.domain
 
 import java.time.LocalDate
 import java.time.LocalDateTime
+import javax.persistence.Column
+import javax.persistence.ElementCollection
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -41,3 +43,19 @@ data class TravelRequest (
 enum class TravelRequestStatus {
         CREATED, ACCEPTED, REFUSED
 }
+
+@Entity
+data class User(
+        @Id
+        @GeneratedValue
+        var id: Long? = null,
+
+        @Column(unique = true)
+        val username: String,
+        val password: String,
+        val enabled: Boolean = true,
+
+        @ElementCollection
+        val roles: MutableList<String>
+
+)

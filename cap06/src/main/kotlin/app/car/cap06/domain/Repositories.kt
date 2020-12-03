@@ -9,3 +9,5 @@ interface PassengerRepository: JpaRepository<Passenger, Long>
 interface TravelRequestRepository: JpaRepository<TravelRequest, Long> {
     fun findByStatus(status: TravelRequestStatus): List<TravelRequest>
 }
+
+interface UserRepository: JpaRepository<User, Long>

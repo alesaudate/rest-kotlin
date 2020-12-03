@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 
 import io.restassured.RestAssured.given
+import io.restassured.RestAssured.basic
 import org.hamcrest.Matchers.equalTo
 import org.hamcrest.Matchers.notNullValue
 
@@ -18,7 +19,9 @@ class PassengerAPITestIT {
 
     @BeforeEach
     fun setup() {
-        RestAssured.port = port
+        RestAssured.baseURI = "https://localhost:$port"
+        RestAssured.useRelaxedHTTPSValidation()
+        RestAssured.authentication = basic("admin","password")
     }
 
     @Test
