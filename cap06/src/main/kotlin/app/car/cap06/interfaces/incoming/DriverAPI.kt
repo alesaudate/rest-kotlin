@@ -1,7 +1,7 @@
-package app.car.cap04.interfaces.incoming
+package app.car.cap06.interfaces.incoming
 
-import app.car.cap04.domain.Driver
-import app.car.cap04.domain.DriverRepository
+import app.car.cap06.domain.Driver
+import app.car.cap06.domain.DriverRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
@@ -36,7 +36,7 @@ class DriverAPI(
     fun createDriver(@RequestBody driver: Driver) = driverRepository.save(driver)
 
     @PutMapping("/drivers/{id}")
-    fun fullUpdateDriver(@PathVariable("id") id:Long, @RequestBody driver: Driver) : Driver {
+    fun fullUpdateDriver(@PathVariable("id") id:Long, @RequestBody driver:Driver) : Driver {
         val foundDriver = findDriver(id)
         val copyDriver = foundDriver.copy(
             birthDate = driver.birthDate,

@@ -1,7 +1,7 @@
-package app.car.cap04.interfaces.incoming
+package app.car.cap03.interfaces
 
-import app.car.cap04.domain.Passenger
-import app.car.cap04.domain.PassengerRepository
+import app.car.cap03.domain.Passenger
+import app.car.cap03.domain.PassengerRepository
 import app.car.cap06.domain.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
