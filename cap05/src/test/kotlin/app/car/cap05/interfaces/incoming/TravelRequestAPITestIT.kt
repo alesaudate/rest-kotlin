@@ -2,20 +2,23 @@ package app.car.cap05.interfaces.incoming
 
 import app.car.cap05.infrastructure.loadFileContents
 import com.github.tomakehurst.wiremock.WireMockServer
+import com.github.tomakehurst.wiremock.client.WireMock.equalTo
+import com.github.tomakehurst.wiremock.client.WireMock.get
+import com.github.tomakehurst.wiremock.client.WireMock.okJson
+import com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.web.server.LocalServerPort
-import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
-import org.springframework.test.context.ActiveProfiles
-import com.github.tomakehurst.wiremock.client.WireMock.*
-import org.hamcrest.Matchers.equalTo as equalToHamcrest
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.Matchers.notNullValue
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.web.server.LocalServerPort
+import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
+import org.springframework.test.context.ActiveProfiles
+import org.hamcrest.Matchers.equalTo as equalToHamcrest
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -80,11 +83,12 @@ class TravelRequestAPITestIT {
 
     fun setupServer() {
 
-        server.stubFor(get(urlPathEqualTo("/maps/api/directions/json"))
-            .withQueryParam("origin", equalTo("Avenida Paulista, 900"))
-            .withQueryParam("destination", equalTo("Avenida Paulista, 1000"))
-            .withQueryParam("key", equalTo("APIKEY"))
-            .willReturn(okJson(loadFileContents("/responses/gmaps/sample_response.json")))
+        server.stubFor(
+            get(urlPathEqualTo("/maps/api/directions/json"))
+                .withQueryParam("origin", equalTo("Avenida Paulista, 900"))
+                .withQueryParam("destination", equalTo("Avenida Paulista, 1000"))
+                .withQueryParam("key", equalTo("APIKEY"))
+                .willReturn(okJson(loadFileContents("/responses/gmaps/sample_response.json")))
         )
 
     }

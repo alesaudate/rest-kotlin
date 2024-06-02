@@ -2,7 +2,7 @@ package app.car.cap04.interfaces.incoming
 
 import app.car.cap04.domain.Passenger
 import app.car.cap04.domain.PassengerRepository
-import app.car.cap06.domain.*
+import app.car.cap04.domain.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service

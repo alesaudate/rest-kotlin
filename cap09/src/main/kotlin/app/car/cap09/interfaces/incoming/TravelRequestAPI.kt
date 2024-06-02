@@ -14,9 +14,9 @@ import java.time.LocalDateTime
 import org.springframework.web.bind.annotation.RequestParam
 
 import org.springframework.web.bind.annotation.GetMapping
-import javax.validation.Valid
-import javax.validation.constraints.NotEmpty
-import javax.validation.constraints.NotNull
+import jakarta.validation.Valid
+import jakarta.validation.constraints.NotEmpty
+import jakarta.validation.constraints.NotNull
 
 
 @Service

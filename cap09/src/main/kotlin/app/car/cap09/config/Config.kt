@@ -4,74 +4,76 @@ import app.car.cap09.domain.UserRepository
 import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.oas.models.info.Contact
 import io.swagger.v3.oas.models.info.Info
+import jakarta.annotation.PostConstruct
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.support.ReloadableResourceBundleMessageSource
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
+import org.springframework.http.HttpMethod.GET
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.provisioning.JdbcUserDetailsManager
+import org.springframework.security.web.DefaultSecurityFilterChain
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
-import javax.annotation.PostConstruct
 import javax.sql.DataSource
 import app.car.cap09.domain.User as DomainUser
 
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(jsr250Enabled = true)
+@EnableMethodSecurity(jsr250Enabled = true)
 class SecurityConfig(
     val datasource: DataSource
-) : WebSecurityConfigurerAdapter() {
+) {
 
     @Bean
     fun passwordEncoder() = BCryptPasswordEncoder()
 
-    override fun configure(http: HttpSecurity) {
-        http.csrf().disable()
-        http.cors()
-
-        http.sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
-        http
-            .authorizeRequests()
-                .antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**")
-                .permitAll()
-            .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic()
-    }
-
-    override fun configure(auth: AuthenticationManagerBuilder) {
-
-        val queryUsers = "select username, password, enabled from user where username=?"
-        val queryRoles = "select u.username, r.roles from user_roles r, user u where r.user_id = u.id and u.username=?"
-
-        auth.jdbcAuthentication()
-            .dataSource(datasource)
-            .passwordEncoder(passwordEncoder())
-            .usersByUsernameQuery(queryUsers)
-            .authoritiesByUsernameQuery(queryRoles)
+    @Bean
+    fun jdbcUserDetailsManager(): JdbcUserDetailsManager {
+        return JdbcUserDetailsManager(datasource).also {
+            it.usersByUsernameQuery = "select username, password, enabled from users where username=?"
+            it.setAuthoritiesByUsernameQuery("select u.username, r.roles from user_roles r, users u where r.user_id = u.id and u.username=?")
+        }
     }
 
     @Bean
+    fun securityFilterChain(http: HttpSecurity, userDetailsService: UserDetailsService): DefaultSecurityFilterChain {
+        http.csrf { it.disable() }
+        http.sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
+        http.authorizeHttpRequests {
+            it.requestMatchers(GET, "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**")
+                .permitAll()
+        }
+            .authorizeHttpRequests {
+                it.anyRequest().authenticated()
+            }
+        http.httpBasic { }
+        http.userDetailsService(userDetailsService)
+        http.cors {
+            it.configurationSource(corsConfigurationSource())
+        }
+        return http.build()
+    }
+
     fun corsConfigurationSource(): CorsConfigurationSource {
-        val configuration = CorsConfiguration()
-        configuration.allowedOrigins = listOf("https://bestcars.com")
-        configuration.allowedMethods = listOf("GET","POST","PUT","DELETE","PATCH")
-        configuration.addAllowedHeader("*")
-        val source = UrlBasedCorsConfigurationSource()
-        source.registerCorsConfiguration("/**", configuration)
+        val configuration = CorsConfiguration().apply {
+            allowedOriginPatterns = listOf("https://bestcars.com")
+            allowedMethods = listOf("GET","POST","PUT","DELETE","PATCH")
+            addAllowedHeader("*")
+        }
+        val source = UrlBasedCorsConfigurationSource().apply {
+            registerCorsConfiguration("/**", configuration)
+        }
         return source
     }
+
 }
 
 @Configuration

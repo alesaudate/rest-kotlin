@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "5168c34d-e389-48f4-9ff0-1d12c44fa715",
+		"_postman_id": "3a51cf19-caa9-46bc-aece-f3b215275164",
 		"name": "APIs_REST",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -13,10 +13,18 @@
 					"request": {
 						"auth": {
 							"type": "basic",
-							"basic": {
-								"password": "password",
-								"username": "admin"
-							}
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
 						},
 						"method": "OPTIONS",
 						"header": [
@@ -39,7 +47,15 @@
 								"disabled": true
 							}
 						],
-						"url": "{{host}}/drivers",
+						"url": {
+							"raw": "{{host}}/drivers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"drivers"
+							]
+						},
 						"description": "Utilizamos esta API para listar os motoristas que estão na base."
 					},
 					"response": []
@@ -49,10 +65,18 @@
 					"request": {
 						"auth": {
 							"type": "basic",
-							"basic": {
-								"password": "password",
-								"username": "admin"
-							}
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -70,14 +94,22 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\"\n}",
+							"raw": "{\n  \"name\": \"string\",\n  \"birthDate\": \"2000-01-01\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{host}}/drivers"
+						"url": {
+							"raw": "{{host}}/drivers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"drivers"
+							]
+						}
 					},
 					"response": []
 				},
@@ -86,7 +118,16 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}/drivers/1"
+						"url": {
+							"raw": "{{host}}/drivers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"drivers",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -104,14 +145,23 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\"\n}",
+							"raw": "{\n  \"name\": \"string2\",\n  \"birthDate\": \"2000-01-01\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{host}}/drivers/1"
+						"url": {
+							"raw": "{{host}}/drivers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"drivers",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -120,7 +170,16 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}/drivers/1"
+						"url": {
+							"raw": "{{host}}/drivers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"drivers",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -145,12 +204,20 @@
 								}
 							}
 						},
-						"url": "{{host}}/drivers/1"
+						"url": {
+							"raw": "{{host}}/drivers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"drivers",
+								"1"
+							]
+						}
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Requisições de viagens",
@@ -160,10 +227,18 @@
 					"request": {
 						"auth": {
 							"type": "basic",
-							"basic": {
-								"password": "password",
-								"username": "admin"
-							}
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -188,7 +263,15 @@
 								}
 							}
 						},
-						"url": "{{host}}/travelRequests"
+						"url": {
+							"raw": "{{host}}/travelRequests",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"travelRequests"
+							]
+						}
 					},
 					"response": []
 				},
@@ -198,7 +281,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/travelRequests/nearby?currentAddress",
+							"raw": "{{host}}/travelRequests/nearby?currentAddress=Avenida Paulista, 90",
 							"host": [
 								"{{host}}"
 							],
@@ -209,15 +292,14 @@
 							"query": [
 								{
 									"key": "currentAddress",
-									"value": null
+									"value": "Avenida Paulista, 90"
 								}
 							]
 						}
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Passageiros",
@@ -227,7 +309,15 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}/passengers"
+						"url": {
+							"raw": "{{host}}/passengers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"passengers"
+							]
+						}
 					},
 					"response": []
 				},
@@ -236,10 +326,18 @@
 					"request": {
 						"auth": {
 							"type": "basic",
-							"basic": {
-								"password": "password",
-								"username": "admin"
-							}
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -259,7 +357,15 @@
 								}
 							}
 						},
-						"url": "{{host}}/passengers"
+						"url": {
+							"raw": "{{host}}/passengers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"passengers"
+							]
+						}
 					},
 					"response": []
 				},
@@ -268,7 +374,16 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}/passengers/1"
+						"url": {
+							"raw": "{{host}}/passengers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"passengers",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -293,7 +408,16 @@
 								}
 							}
 						},
-						"url": "{{host}}/passengers/1"
+						"url": {
+							"raw": "{{host}}/passengers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"passengers",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -302,7 +426,16 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}/passengers/1"
+						"url": {
+							"raw": "{{host}}/passengers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"passengers",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -327,22 +460,28 @@
 								}
 							}
 						},
-						"url": "{{host}}/passengers/1"
+						"url": {
+							"raw": "{{host}}/passengers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"passengers",
+								"1"
+							]
+						}
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		}
 	],
 	"variable": [
 		{
-			"id": "6d43f6f4-21b6-4768-bcb0-c93bb8dda449",
 			"key": "host",
 			"value": "http",
 			"type": "string",
 			"disabled": true
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

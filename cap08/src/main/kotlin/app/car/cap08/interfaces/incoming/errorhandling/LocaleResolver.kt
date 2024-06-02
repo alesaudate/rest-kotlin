@@ -3,7 +3,7 @@ package app.car.cap08.interfaces.incoming.errorhandling
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver
 import java.util.Locale
-import javax.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletRequest
 
 @Component
 class LocaleResolver: AcceptHeaderLocaleResolver() {

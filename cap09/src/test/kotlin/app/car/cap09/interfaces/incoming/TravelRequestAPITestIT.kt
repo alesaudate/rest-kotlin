@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.web.server.LocalServerPort
+
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
 import org.springframework.test.context.ActiveProfiles
 import com.github.tomakehurst.wiremock.client.WireMock.*
@@ -16,6 +16,7 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.Matchers.notNullValue
+import org.springframework.boot.test.web.server.LocalServerPort
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

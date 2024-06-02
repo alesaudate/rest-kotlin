@@ -3,13 +3,14 @@ package app.car.cap08.domain
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDate
 import java.time.LocalDateTime
-import javax.persistence.Column
-import javax.persistence.ElementCollection
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.ManyToOne
-import javax.validation.constraints.Size
+import jakarta.persistence.Column
+import jakarta.persistence.ElementCollection
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.Id
+import jakarta.persistence.ManyToOne
+import jakarta.persistence.Table
+import jakarta.validation.constraints.Size
 
 @Entity
 @Schema(description = "Representa um motorista dentro da plataforma")
@@ -53,6 +54,7 @@ enum class TravelRequestStatus {
 }
 
 @Entity
+@Table(name = "users")
 data class User(
         @Id
         @GeneratedValue

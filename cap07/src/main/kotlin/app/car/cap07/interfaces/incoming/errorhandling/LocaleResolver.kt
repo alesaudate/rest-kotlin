@@ -1,9 +1,10 @@
 package app.car.cap07.interfaces.incoming.errorhandling
 
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver
 import java.util.Locale
-import javax.servlet.http.HttpServletRequest
+
 
 @Component
 class LocaleResolver: AcceptHeaderLocaleResolver() {

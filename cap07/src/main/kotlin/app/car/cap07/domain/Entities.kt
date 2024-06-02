@@ -2,12 +2,13 @@ package app.car.cap07.domain
 
 import java.time.LocalDate
 import java.time.LocalDateTime
-import javax.persistence.Column
-import javax.persistence.ElementCollection
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.ManyToOne
+import jakarta.persistence.Column
+import jakarta.persistence.ElementCollection
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.Id
+import jakarta.persistence.ManyToOne
+import jakarta.persistence.Table
 
 @Entity
 data class Driver(
@@ -45,6 +46,7 @@ enum class TravelRequestStatus {
 }
 
 @Entity
+@Table(name = "users")
 data class User(
         @Id
         @GeneratedValue
