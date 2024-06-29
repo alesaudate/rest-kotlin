@@ -1,18 +1,18 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-	id("org.springframework.boot") version "3.3.0"
+	id("org.springframework.boot") version "3.3.1"
 	id("io.spring.dependency-management") version "1.1.5"
+	kotlin("plugin.jpa") version "1.9.24"
 	kotlin("jvm") version "1.9.24"
 	kotlin("plugin.spring") version "1.9.24"
-	kotlin("plugin.jpa") version "1.9.24"
 }
 
 group = "app.car"
 version = "0.0.1-SNAPSHOT"
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_21
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
 }
 
 repositories {
@@ -35,10 +35,9 @@ dependencies {
 	testImplementation("org.springframework.cloud:spring-cloud-contract-wiremock:4.1.3")
 }
 
-tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs += "-Xjsr305=strict"
-		jvmTarget = "21"
+kotlin {
+	compilerOptions {
+		freeCompilerArgs.addAll("-Xjsr305=strict")
 	}
 }
 

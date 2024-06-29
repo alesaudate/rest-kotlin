@@ -24,7 +24,7 @@ class PassengerAPI(
         passengerRepository.findById(id).orElseThrow { ResponseStatusException(HttpStatus.NOT_FOUND) }
 
     @PostMapping
-    @RolesAllowed("ROLE_ADMIN")
+    @RolesAllowed("ADMIN")
     fun createPassenger(@RequestBody passenger: Passenger) = passengerRepository.save(passenger)
 
     @PutMapping("/{id}")
