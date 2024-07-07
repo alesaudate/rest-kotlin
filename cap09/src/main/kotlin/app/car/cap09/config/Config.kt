@@ -36,7 +36,7 @@ class SecurityConfig(
     fun passwordEncoder() = BCryptPasswordEncoder()
 
     @Bean
-    fun jdbcUserDetailsManager(): JdbcUserDetailsManager {
+    fun userDetailsService(): UserDetailsService {
         return JdbcUserDetailsManager(datasource).also {
             it.usersByUsernameQuery = "select username, password, enabled from users where username=?"
             it.setAuthoritiesByUsernameQuery("select u.username, r.roles from user_roles r, users u where r.user_id = u.id and u.username=?")

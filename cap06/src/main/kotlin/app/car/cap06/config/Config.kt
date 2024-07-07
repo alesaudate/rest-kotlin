@@ -8,9 +8,11 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.provisioning.JdbcUserDetailsManager
 import org.springframework.security.web.DefaultSecurityFilterChain
 import javax.sql.DataSource
@@ -28,7 +30,7 @@ class SecurityConfig(
 
 
     /*@Bean
-    fun inMemoryUserDetailsManager(passwordEncoder: PasswordEncoder): InMemoryUserDetailsManager {
+    fun userDetailsService(passwordEncoder: PasswordEncoder): UserDetailsService {
         return InMemoryUserDetailsManager().also {
             val password = passwordEncoder.encode("password")
             val driver = User.builder()
@@ -55,15 +57,19 @@ class SecurityConfig(
     }*/
 
     @Bean
-    fun jdbcUserDetailsManager(): JdbcUserDetailsManager {
+    fun userDetailsService(): UserDetailsService {
         return JdbcUserDetailsManager(datasource).also {
-            it.usersByUsernameQuery = "select username, password, enabled from users where username=?"
-            it.setAuthoritiesByUsernameQuery("select u.username, r.roles from user_roles r, users u where r.user_id = u.id and u.username=?")
+            it.setUsersByUsernameQuery("select username, password, enabled " +
+                    "from users where username=?")
+
+            it.setAuthoritiesByUsernameQuery("select u.username, " +
+                    "r.roles from user_roles r, users u where " +
+                    "r.user_id = u.id and u.username=?")
         }
     }
 
     @Bean
-    fun securityFilterChain(http: HttpSecurity, userDetailsService: UserDetailsService): DefaultSecurityFilterChain {
+    fun securityFilterChain(http: HttpSecurity): DefaultSecurityFilterChain {
         http.csrf { it.disable() }
         http.sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
         http.authorizeHttpRequests {
@@ -72,7 +78,6 @@ class SecurityConfig(
         }
         http.httpBasic {  }
         http.headers { it.frameOptions { customizer -> customizer.disable() }}
-        http.userDetailsService(userDetailsService)
         return http.build()
     }
 

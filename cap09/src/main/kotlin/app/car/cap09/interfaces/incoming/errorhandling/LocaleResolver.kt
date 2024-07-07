@@ -8,9 +8,9 @@ import jakarta.servlet.http.HttpServletRequest
 @Component
 class LocaleResolver: AcceptHeaderLocaleResolver() {
 
-    private val DEFAULT_LOCALE = Locale("pt", "BR")
+    private val DEFAULT_LOCALE = Locale.of("pt", "BR")
 
-    private val ACCEPTED_LOCALES = listOf(DEFAULT_LOCALE, Locale("en"))
+    private val ACCEPTED_LOCALES = listOf(DEFAULT_LOCALE, Locale.of("en"))
 
     override fun resolveLocale(request: HttpServletRequest): Locale {
         val acceptLanguageHeader = request.getHeader("Accept-Language")
