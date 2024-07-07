@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3a51cf19-caa9-46bc-aece-f3b215275164",
+		"_postman_id": "1fce6f49-e87c-4342-8796-4b54139fc2d6",
 		"name": "APIs_REST",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -94,7 +94,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\",\n  \"birthDate\": \"2000-01-01\"\n}",
+							"raw": "{\n  \"name\": \"Alexandre Saudate\",\n  \"birthDate\": \"2000-01-01\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -132,6 +132,45 @@
 					"response": []
 				},
 				{
+					"name": "Listar motoristas",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Origin",
+								"value": "http://www.teste.com",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/drivers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"drivers"
+							]
+						},
+						"description": "Utilizamos esta API para listar os motoristas que estão na base."
+					},
+					"response": []
+				},
+				{
 					"name": "Atualizar motorista",
 					"request": {
 						"method": "PUT",
@@ -145,7 +184,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string2\",\n  \"birthDate\": \"2000-01-01\"\n}",
+							"raw": "{\n  \"name\": \"motorista\",\n  \"birthDate\": \"2000-01-01\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -197,7 +236,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\"\n}",
+							"raw": "{\n  \"name\": \"Alexandre\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -350,7 +389,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\"\n}",
+							"raw": "{\n  \"name\": \"Passageiro\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -453,7 +492,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\"\n}",
+							"raw": "{\n  \"name\": \"Passageiro sobrenome\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -480,8 +519,7 @@
 		{
 			"key": "host",
 			"value": "http",
-			"type": "string",
-			"disabled": true
+			"type": "string"
 		}
 	]
 }
