@@ -73,6 +73,7 @@ class SecurityConfig(
                 .authenticated()
         }
         http.httpBasic { }
+        http.headers { it.frameOptions { customizer -> customizer.disable() }}
         return http.build()
     }
 

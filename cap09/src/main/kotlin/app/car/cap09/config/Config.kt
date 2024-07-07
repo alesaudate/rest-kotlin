@@ -44,7 +44,7 @@ class SecurityConfig(
     }
 
     @Bean
-    fun securityFilterChain(http: HttpSecurity, userDetailsService: UserDetailsService): DefaultSecurityFilterChain {
+    fun securityFilterChain(http: HttpSecurity): DefaultSecurityFilterChain {
         http.csrf { it.disable() }
         http.sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
         http.authorizeHttpRequests {
@@ -55,7 +55,7 @@ class SecurityConfig(
                 it.anyRequest().authenticated()
             }
         http.httpBasic { }
-        http.userDetailsService(userDetailsService)
+        http.headers { it.frameOptions { customizer -> customizer.disable() }}
         http.cors {
             it.configurationSource(corsConfigurationSource())
         }
