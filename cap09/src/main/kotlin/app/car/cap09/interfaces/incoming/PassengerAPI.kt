@@ -1,12 +1,13 @@
 package app.car.cap09.interfaces.incoming
 
 import app.car.cap09.domain.*
+import jakarta.annotation.security.RolesAllowed
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
-import javax.annotation.security.RolesAllowed
+
 
 @Service
 @RestController
@@ -23,7 +24,7 @@ class PassengerAPI(
         passengerRepository.findById(id).orElseThrow { ResponseStatusException(HttpStatus.NOT_FOUND) }
 
     @PostMapping
-    @RolesAllowed("ROLE_ADMIN")
+    @RolesAllowed("ADMIN")
     fun createPassenger(@RequestBody passenger: Passenger) = passengerRepository.save(passenger)
 
     @PutMapping("/{id}")

@@ -3,20 +3,19 @@ package app.car.cap07.interfaces.incoming
 import app.car.cap07.domain.TravelRequestStatus
 import app.car.cap07.domain.TravelService
 import app.car.cap07.interfaces.incoming.mapping.TravelRequestMapper
+import jakarta.validation.Valid
+import jakarta.validation.constraints.NotEmpty
+import jakarta.validation.constraints.NotNull
 import org.springframework.hateoas.EntityModel
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
-import org.springframework.web.bind.annotation.RequestParam
-
-import org.springframework.web.bind.annotation.GetMapping
-import javax.validation.Valid
-import javax.validation.constraints.NotEmpty
-import javax.validation.constraints.NotNull
 
 
 @Service

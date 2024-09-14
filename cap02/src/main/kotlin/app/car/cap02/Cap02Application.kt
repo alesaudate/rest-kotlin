@@ -9,3 +9,4 @@ class Cap02Application
 fun main(args: Array<String>) {
 	runApplication<Cap02Application>(*args)
 }
+
